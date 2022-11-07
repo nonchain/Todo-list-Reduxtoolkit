@@ -11,6 +11,6 @@
 
 @layer components {
   .button {
-    @apply bg-gray-200 text-gray-800 text-base font-semibold rounded;
+    @apply px-3 py-1 bg-gray-200 text-gray-800 text-base font-semibold rounded;
   }
 }
