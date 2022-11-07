@@ -8,3 +8,9 @@
     font-family: 'Montserrat', sans-serif;
   }
 }
+
+@layer components {
+  .button {
+    @apply bg-gray-200 text-gray-800 text-base font-semibold rounded;
+  }
+}
