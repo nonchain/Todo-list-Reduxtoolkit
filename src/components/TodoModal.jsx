@@ -32,7 +32,7 @@ function TodoModal({ visibility, setVisibility }) {
           </div>
 
           <div className='mt-8 flex items-center gap-2 place-self-end'>
-            <Button type='button' variant='secondary'>Cancel</Button>
+            <Button type='button' variant='secondary' onClick={visibilityHandler}>Cancel</Button>
             <Button >Add</Button>
           </div>
         </form>
