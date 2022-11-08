@@ -3,13 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const readLocalStorage = ()=> {
    const todoListData = window.localStorage.getItem('todoList');
    if(todoListData) return JSON.parse(todoListData);
+
+   // There is no item
+   window.localStorage.setItem('todoList', JSON.stringify([]));
+   return [];
 }
 
 const initialState = {
-   todoList: [
-      {id: 1, title: 'Task 1', category: 'no-category', time: '11/1/2022'},
-      {id: 2, title: 'Task 2', category: 'work', time: '11/5/2022'},
-   ],
+   todoList: readLocalStorage(),
 }
 
 const todoSlice = createSlice({
@@ -17,7 +18,18 @@ const todoSlice = createSlice({
    initialState,
    reducers: {
       addToDo(state, actions) {
-         state.todoList.push(actions.payload)
+         state.todoList.push(actions.payload);
+         const todoListData = window.localStorage.getItem('todoList');
+         // if there was a list before
+         if(todoListData) {
+            const todoListArray = JSON.parse(todoListData);
+            todoListArray.push({...actions.payload});
+            window.localStorage.setItem('todoList', JSON.stringify(todoListArray));
+         }
+         // If it is the first item
+         else {
+            window.localStorage.setItem('todoList', JSON.stringify([{...actions.payload}]))
+         }
       }
    }
 })
