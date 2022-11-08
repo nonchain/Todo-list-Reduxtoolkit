@@ -6,7 +6,11 @@ import Button from '../ui/Button'
 import Select from '../ui/Select'
 
 const ToDoHeader = () => {
-  const [modalVisibility, setModalVisibility] = useState(true);
+  const [modalVisibility, setModalVisibility] = useState(false);
+
+  const visibilityHandler = () => {
+    setModalVisibility(true);
+ }
 
   return (
 
@@ -19,7 +23,7 @@ const ToDoHeader = () => {
         ReactDom.createPortal(<TodoModal visibility={modalVisibility} setVisibility={setModalVisibility} />, document.getElementById('modal-root'))
       }
 
-      <Button type='button'>Add Task</Button>
+      <Button type='button' onClick={visibilityHandler}>Add Task</Button>
       <Select id='category' name='category'>
         <option value="all">All</option>
         <option value="personal">Personal</option>
