@@ -6,6 +6,7 @@ import ImageButton from '../ui/ImageButton'
 import Input from '../ui/Input'
 import { useDispatch } from 'react-redux';
 import { addToDo } from '../redux/features/todoSlice';
+import { toast } from 'react-hot-toast';
 
 const defaultValues = {
   title: '',
@@ -26,6 +27,7 @@ function TodoModal({ visibility, setVisibility }) {
     const id = nanoid();
     const time = new Date().toLocaleDateString();
     dispatch(addToDo({id, time, ...data}));
+    toast.success('Task added successfully')
     visibilityHandler();
   }
 
