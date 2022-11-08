@@ -13,7 +13,7 @@ const defaultValues = {
   category: 'no-category'
 }
 
-function TodoModal({ visibility, setVisibility }) {
+function TodoModal({ visibility, setVisibility, createMode = true }) {
   const dispatch = useDispatch();
   const formMethods = useForm({ defaultValues: defaultValues });
   const { register, handleSubmit, setError, reset } = formMethods;
@@ -24,6 +24,7 @@ function TodoModal({ visibility, setVisibility }) {
   }
 
   const onSubmitHandler = (data) => {
+    if(!createMode) { return console.log('Updated')}
     const id = nanoid();
     const time = new Date().toLocaleDateString();
     dispatch(addToDo({id, time, ...data}));
@@ -40,7 +41,7 @@ function TodoModal({ visibility, setVisibility }) {
           <i className="ri-close-fill text-gray-700 text-xl"></i>
         </ImageButton>
 
-        <h2 className='text-gray-800 text-xl font-bold'>Add new task</h2>
+        <h2 className='text-gray-800 text-xl font-bold'>{createMode ? 'Add new' : 'Update'} task</h2>
         <FormProvider {...formMethods}>
           <form action="" className='mt-5 flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
             <Input
@@ -63,7 +64,7 @@ function TodoModal({ visibility, setVisibility }) {
 
             <div className='mt-8 flex items-center gap-2 place-self-end'>
               <Button type='button' variant='secondary' onClick={visibilityHandler}>Cancel</Button>
-              <Button >Add</Button>
+              <Button >{createMode ? 'Add' : 'Update'}</Button>
             </div>
           </form>
         </FormProvider>
