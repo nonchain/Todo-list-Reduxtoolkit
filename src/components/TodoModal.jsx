@@ -1,12 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { useForm, FormProvider } from "react-hook-form";
+import { nanoid } from '@reduxjs/toolkit';
 import Button from '../ui/Button'
 import ImageButton from '../ui/ImageButton'
 import Input from '../ui/Input'
-import Select from '../ui/Select'
+import { useDispatch } from 'react-redux';
+import { addToDo } from '../redux/features/todoSlice';
+
+const defaultValues = {
+  title: '',
+  category: 'no-category'
+}
 
 function TodoModal({ visibility, setVisibility }) {
+  const dispatch = useDispatch();
+  const formMethods = useForm({ defaultValues: defaultValues });
+  const { register, handleSubmit, setError, reset } = formMethods;
+
   const visibilityHandler = () => {
+    reset();
     setVisibility(!visibility);
+  }
+
+  const onSubmitHandler = (data) => {
+    const id = nanoid();
+    const time = new Date().toLocaleDateString();
+    dispatch(addToDo({id, time, ...data}));
+    visibilityHandler();
   }
 
   if (!visibility) return;
@@ -19,24 +39,32 @@ function TodoModal({ visibility, setVisibility }) {
         </ImageButton>
 
         <h2 className='text-gray-800 text-xl font-bold'>Add new task</h2>
-        <form action="" className='mt-5 flex flex-col gap-4'>
-          <Input id='task-title' type='text' label='Title' placeholder='e.g Go to gym' />
+        <FormProvider {...formMethods}>
+          <form action="" className='mt-5 flex flex-col gap-4' onSubmit={handleSubmit(onSubmitHandler)}>
+            <Input
+              id='task-title'
+              name='title'
+              type='text'
+              label='Title'
+              placeholder='e.g Go to gym'
+              length={16} />
 
-          <div className='flex flex-col gap-1'>
-            <label className='text-base font-bold text-gray-600' htmlFor="category">Category</label>
-            <Select id='category' name='category'>
-              <option className='option' value="no-category">No Category</option>
-              <option className='option' value="personal">Personal</option>
-              <option className='option' value="work">Work</option>
-              <option className='option' value="course">Course</option>
-            </Select>
-          </div>
+            <div className='flex flex-col gap-1'>
+              <label className='text-base font-bold text-gray-600' htmlFor="category">Category</label>
+              <select className='select' id='category' name='category' {...register('category')}>
+                <option className='option' value="no-category">No Category</option>
+                <option className='option' value="personal">Personal</option>
+                <option className='option' value="work">Work</option>
+                <option className='option' value="course">Course</option>
+              </select>
+            </div>
 
-          <div className='mt-8 flex items-center gap-2 place-self-end'>
-            <Button type='button' variant='secondary' onClick={visibilityHandler}>Cancel</Button>
-            <Button >Add</Button>
-          </div>
-        </form>
+            <div className='mt-8 flex items-center gap-2 place-self-end'>
+              <Button type='button' variant='secondary' onClick={visibilityHandler}>Cancel</Button>
+              <Button >Add</Button>
+            </div>
+          </form>
+        </FormProvider>
       </div>
     </div>
   )
