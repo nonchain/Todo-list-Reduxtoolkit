@@ -36,7 +36,7 @@ function TodoModal({ visibility, setVisibility }) {
   return (
     <div className='w-80 bg-gray-50 rounded-lg fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50'>
       <div className="px-6 py-5 w-full h-full relative">
-        <ImageButton onClick={visibilityHandler}>
+        <ImageButton className='absolute -top-11 right-0' onClick={visibilityHandler}>
           <i className="ri-close-fill text-gray-700 text-xl"></i>
         </ImageButton>
 
