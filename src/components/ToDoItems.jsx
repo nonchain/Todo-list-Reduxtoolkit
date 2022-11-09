@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import ImageButton from '../ui/ImageButton';
 import Overlay from '../ui/Overlay';
 import TodoModal from './TodoModal';
+import CheckBox from '../ui/CheckBox';
 
 function ToDoItems({ item }) {
    const dispatch = useDispatch();
@@ -34,12 +35,16 @@ function ToDoItems({ item }) {
          }
          <li>
             <div className="px-3 py-4 w-full bg-gray-50 flex items-center justify-between rounded shadow-sm">
-               <div className='flex flex-col'>
-                  <h3 className='text-base text-gray-800 font-semibold'>{item.title}</h3>
-                  <span className='text-sm text-gray-600 font-semibold'>
-                     {item.category} - {format(new Date(item.time), 'MM/dd/yyyy')}
-                  </span>
+               <div className="flex gap-4 items-center">
+                  <CheckBox />
+                  <div className='flex flex-col'>
+                     <h3 className='text-base text-gray-800 font-semibold'>{item.title}</h3>
+                     <span className='text-sm text-gray-600 font-semibold'>
+                        {item.category} - {format(new Date(item.time), 'MM/dd/yyyy')}
+                     </span>
+                  </div>
                </div>
+
                <div className='flex gap-2'>
                   <ImageButton onClick={deleteHandler}>
                      <i className="ri-delete-bin-6-fill text-red-500"></i>
