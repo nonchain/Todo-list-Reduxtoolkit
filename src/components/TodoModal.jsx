@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, FormProvider } from "react-hook-form";
 import { nanoid } from '@reduxjs/toolkit';
 import Button from '../ui/Button'
 import ImageButton from '../ui/ImageButton'
 import Input from '../ui/Input'
 import { useDispatch } from 'react-redux';
-import { addToDo } from '../redux/features/todoSlice';
+import { addToDo, updateToDo } from '../redux/features/todoSlice';
 import { toast } from 'react-hot-toast';
 
 const defaultValues = {
@@ -13,10 +13,17 @@ const defaultValues = {
   category: 'no-category'
 }
 
-function TodoModal({ visibility, setVisibility, createMode = true }) {
+function TodoModal({ visibility, setVisibility, todo, createMode = true }) {
   const dispatch = useDispatch();
   const formMethods = useForm({ defaultValues: defaultValues });
-  const { register, handleSubmit, setError, reset } = formMethods;
+  const { register, handleSubmit, setValue, reset } = formMethods;
+
+  useEffect(() => {
+    if (!createMode && todo) {
+      setValue('title', todo.title);
+      setValue('category', todo.category);
+    }
+  }, [createMode, todo, visibility])
 
   const visibilityHandler = () => {
     reset();
@@ -24,10 +31,18 @@ function TodoModal({ visibility, setVisibility, createMode = true }) {
   }
 
   const onSubmitHandler = (data) => {
-    if(!createMode) { return console.log('Updated')}
     const id = nanoid();
     const time = new Date().toLocaleDateString();
-    dispatch(addToDo({id, time, ...data}));
+
+    // Update task
+    if (!createMode) {
+      dispatch(updateToDo({ ...todo, ...data }));
+      toast.success('Task updated successfully')
+      visibilityHandler();
+      return;
+    }
+    // Add new Task
+    dispatch(addToDo({ id, time, ...data }));
     toast.success('Task added successfully')
     visibilityHandler();
   }
