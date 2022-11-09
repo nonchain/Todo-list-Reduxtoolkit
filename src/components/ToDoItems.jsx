@@ -9,6 +9,13 @@ import Overlay from '../ui/Overlay';
 import TodoModal from './TodoModal';
 import CheckBox from '../ui/CheckBox';
 
+const toDoCategory = {
+   'no-category': 'No Category',
+   'personal': 'Personal',
+   'work': 'Work',
+   'course': 'Course',
+}
+
 function ToDoItems({ item }) {
    const dispatch = useDispatch();
    const [modalVisibility, setModalVisibility] = useState(false);
@@ -40,8 +47,8 @@ function ToDoItems({ item }) {
                   <CheckBox completedTask={completedTask} setCompletedTask={setCompletedTask}/>
                   <div className='flex flex-col'>
                      <h3 className={`text-base text-gray-800 font-semibold duration-150 transition ${completedTask ? 'line-through opacity-75' : ''}`}>{item.title}</h3>
-                     <span className='text-sm text-gray-600 font-semibold'>
-                        {item.category} - {format(new Date(item.time), 'MM/dd/yyyy')}
+                     <span className='text-[13px] text-gray-600 font-semibold'>
+                        {toDoCategory[item.category]} - {format(new Date(item.time), 'MM/dd/yyyy')}
                      </span>
                   </div>
                </div>
