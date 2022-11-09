@@ -30,7 +30,7 @@ function ToDoItems({ item }) {
             ReactDom.createPortal(<Overlay visibility={modalVisibility} setVisibility={setModalVisibility} />, document.getElementById('overlay-root'))
          }
          {
-            ReactDom.createPortal(<TodoModal createMode={false} visibility={modalVisibility} setVisibility={setModalVisibility} />, document.getElementById('modal-root'))
+            ReactDom.createPortal(<TodoModal todo={item} createMode={false} visibility={modalVisibility} setVisibility={setModalVisibility} />, document.getElementById('modal-root'))
          }
          <li>
             <div className="px-3 py-4 w-full bg-gray-50 flex items-center justify-between rounded shadow-sm">
