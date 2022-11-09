@@ -17,7 +17,17 @@
   .select {
     @apply py-4 pl-5 bg-gray-200 text-gray-600 text-base font-medium rounded relative; 
   }
-  .select > option {
-    width: 120px !important;
+
+  .checkbox {
+    @apply appearance-none w-full bg-gray-100 h-full border-2 border-gray-500 rounded checked:bg-blue-500 checked:border-blue-700 duration-200;
+  }
+  .checkbox:checked ~ i {
+    @apply block;
+  }
+}
+
+@layer utilities {
+  .absolute-center {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
   }
 }
