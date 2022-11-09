@@ -1,5 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/*
+**************************************************
+   InitialState saving format is an array that 
+   contains Objects with these parameters
+   - {id, title, time, category}
+**************************************************
+*/
+
 const readLocalStorage = ()=> {
    const todoListData = window.localStorage.getItem('todoList');
    if(todoListData) return JSON.parse(todoListData);
@@ -44,10 +52,25 @@ const todoSlice = createSlice({
             window.localStorage.setItem('todoList', JSON.stringify(todoListArray));
             state.todoList = todoListArray;
          }
+      },
+      updateToDo(state, actions) {
+         const todoListData = window.localStorage.getItem('todoList');
+         
+         if(todoListData) {
+            const todoListArray = JSON.parse(todoListData);
+            todoListArray.forEach(todo => {
+               if(todo.id === actions.payload.id) {
+                  todo.title = actions.payload.title;
+                  todo.category = actions.payload.category;
+               }
+            });
+            window.localStorage.setItem('todoList', JSON.stringify(todoListArray));
+            state.todoList = todoListArray;
+         }
       }
    }
 })
 
 export const selectAllTodo = state => state.todo.todoList;
-export const { addToDo, deleteToDo } = todoSlice.actions;
+export const { addToDo, deleteToDo, updateToDo } = todoSlice.actions;
 export default todoSlice.reducer;
