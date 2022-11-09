@@ -41,8 +41,8 @@ function ToDoItems({ item }) {
                   </span>
                </div>
                <div className='flex gap-2'>
-                  <ImageButton className={'bg-red-400'} onClick={deleteHandler}>
-                     <i className="ri-delete-bin-6-fill text-white"></i>
+                  <ImageButton onClick={deleteHandler}>
+                     <i className="ri-delete-bin-6-fill text-red-500"></i>
                   </ImageButton>
                   <ImageButton onClick={editHandler}>
                      <i className="ri-pencil-fill text-gray-700"></i>
