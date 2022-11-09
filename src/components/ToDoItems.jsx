@@ -12,6 +12,7 @@ import CheckBox from '../ui/CheckBox';
 function ToDoItems({ item }) {
    const dispatch = useDispatch();
    const [modalVisibility, setModalVisibility] = useState(false);
+   const [completedTask, setCompletedTask] = useState(false);
 
    const editHandler = () => {
       setModalVisibility(true);
@@ -36,9 +37,9 @@ function ToDoItems({ item }) {
          <li>
             <div className="px-3 py-4 w-full bg-gray-50 flex items-center justify-between rounded shadow-sm">
                <div className="flex gap-4 items-center">
-                  <CheckBox />
+                  <CheckBox completedTask={completedTask} setCompletedTask={setCompletedTask}/>
                   <div className='flex flex-col'>
-                     <h3 className='text-base text-gray-800 font-semibold'>{item.title}</h3>
+                     <h3 className={`text-base text-gray-800 font-semibold duration-150 transition ${completedTask ? 'line-through opacity-75' : ''}`}>{item.title}</h3>
                      <span className='text-sm text-gray-600 font-semibold'>
                         {item.category} - {format(new Date(item.time), 'MM/dd/yyyy')}
                      </span>
