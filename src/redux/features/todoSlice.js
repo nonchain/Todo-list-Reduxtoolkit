@@ -18,6 +18,7 @@ const readLocalStorage = ()=> {
 }
 
 const initialState = {
+   filteredCategory: 'all',
    todoList: readLocalStorage(),
 }
 
@@ -67,10 +68,14 @@ const todoSlice = createSlice({
             window.localStorage.setItem('todoList', JSON.stringify(todoListArray));
             state.todoList = todoListArray;
          }
+      },
+      filterCategory(state, actions) {
+         state.filteredCategory = actions.payload
       }
    }
 })
 
 export const selectAllTodo = state => state.todo.todoList;
-export const { addToDo, deleteToDo, updateToDo } = todoSlice.actions;
+export const selectFilterCategory = state => state.todo.filteredCategory;
+export const { addToDo, deleteToDo, updateToDo, filterCategory } = todoSlice.actions;
 export default todoSlice.reducer;
