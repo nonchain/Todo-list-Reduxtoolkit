@@ -1,6 +1,5 @@
 # Todo-list-Reduxtoolkit
-Build a To-Do list using 
-### React and ReduxToolkit ✅
+Build a To-Do list using **React and ReduxToolkit** ✅
 
 In this project you can **creat,  delete, and update** your Tasks
 
@@ -24,5 +23,5 @@ Tasks save in the Local Storage, so you won't miss them if you refresh the page 
 **react-hot-toast** ***(for showing toasts)***
 
 
-## See Demo :
-[Link](https://task-list-lyart.vercel.app/)
+### See Demo :
+#### [Link](https://task-list-lyart.vercel.app/)
