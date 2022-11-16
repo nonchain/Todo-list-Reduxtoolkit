@@ -1,24 +1,24 @@
 # Todo-list-Reduxtoolkit
-Build a To-Do list using React and ReduxToolkit
+Build a To-Do list using React and ReduxToolkit ✅
 
-In this project you can ### creat, ### delete, and ### update your tasks
+In this project you can **creat,  delete, and update** your Tasks
 
 Tasks save in the Local Storage, so you won't miss them if you refresh the page or exit from your browser
 
 
 ## State management:
-ReduxToolkit
+**ReduxToolkit**
 
 ## Design & Animation:
-Tailwind CSS , Framer-Motion
+**Tailwind CSS , Framer-Motion**
 
 ## Icons:
-Remix-icon
+**Remix-icon**
 
 ## Other libraries:
-date-fns  (for convert date) 
+**date-fns**  ***(for convert date) ***
 
-react-hook-form (for inputs validation)
+**react-hook-form** ***(for inputs validation)***
 
-react-hot-toast (for showing toasts)
+**react-hot-toast** ***(for showing toasts)***
 
