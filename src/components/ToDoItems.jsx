@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { deleteToDo } from '../redux/features/todoSlice';
 import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 import ImageButton from '../ui/ImageButton';
 import Overlay from '../ui/Overlay';
 import TodoModal from './TodoModal';
@@ -16,7 +17,7 @@ const toDoCategory = {
    'course': 'Course',
 }
 
-function ToDoItems({ item }) {
+function ToDoItems({ item, ...rest }) {
    const dispatch = useDispatch();
    const [modalVisibility, setModalVisibility] = useState(false);
    const [completedTask, setCompletedTask] = useState(false);
@@ -41,7 +42,7 @@ function ToDoItems({ item }) {
          {
             ReactDom.createPortal(<TodoModal todo={item} createMode={false} visibility={modalVisibility} setVisibility={setModalVisibility} />, document.getElementById('modal-root'))
          }
-         <li>
+         <motion.li {...rest}>
             <div className="px-3 py-4 w-full bg-gray-50 flex items-center justify-between rounded shadow-sm">
                <div className="flex gap-4 items-center">
                   <CheckBox completedTask={completedTask} setCompletedTask={setCompletedTask}/>
@@ -62,7 +63,7 @@ function ToDoItems({ item }) {
                   </ImageButton>
                </div>
             </div>
-         </li>
+         </motion.li>
       </React.Fragment>
    )
 }
